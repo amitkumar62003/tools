@@ -249,13 +249,13 @@ public class AnalysisWindow extends JFrame implements ActionListener {
 						.getApplicationPath())), new File(Main
 						.getConfiguration().getScalsBaseDir() + "JP2/"));
 				generateRunScript();
-			//	shareClusterLoad();
+				shareClusterLoad();
 				instrumentProcess = new InstrumentProcess();
 				instrumentProcess.start();
-			//	synchronizeProcess = new SynchronizeProcess(Main
-			//			.getConfiguration().getServerHost(), Main
-			//			.getConfiguration().getServerPort());
-			//	synchronizeProcess.start();
+				synchronizeProcess = new SynchronizeProcess(Main
+						.getConfiguration().getServerHost(), Main
+						.getConfiguration().getServerPort());
+				synchronizeProcess.start();
 				stopAnalysis.setEnabled(true);
 				newSenerioBut.setEnabled(true);
 				startAnalysis.setEnabled(false);
@@ -364,19 +364,22 @@ public class AnalysisWindow extends JFrame implements ActionListener {
 				senerioDS.send(dgp);
 			}
 
-			// //System.out.println("Size "+UPDC.size());
+			System.out.println("Size UPDC\n\n\n"+UPDC.size());
 
 			Iterator<String> keys = UPDC.keySet().iterator();
 			Coupling coupling = null;
 			try {
 				while (keys.hasNext()) {
+					System.out.println("map ....next");
 					String clsName = keys.next();
+					System.out.println("calss ...."+clsName);
 					coupling = OADS.get(clsName);
+					System.out.println("coupling ...."+coupling+"\n\n\n");
 					if (clsName != null) {
 						if (coupling == null) {
 							coupling = UPDC.get(clsName);
 							coupling.setClassName(clsName);
-
+							System.out.println("Added Value ...."+coupling.getMessageScope(1)+" IC\n\n\n");
 							dataset2.addValue(coupling.getMessageScope(1),
 									"IC", refineClass(clsName));
 							dataset2.addValue(coupling.getMessageScope(2),
@@ -433,7 +436,7 @@ public class AnalysisWindow extends JFrame implements ActionListener {
 		File input = new File(this.getClass().getResource("icon/cluster.png")
 				.toString().replace("file:", "").replace("/bin", "")
 				.replace("/target/classes", "")
-				.replace("sca/ls/cloud/ui/icon/cluster.png", "")
+				.replace("sdma/rtc/ui/icon/cluster.png", "")
 				+ "agent.sh");
 		String line = null;
 		try {

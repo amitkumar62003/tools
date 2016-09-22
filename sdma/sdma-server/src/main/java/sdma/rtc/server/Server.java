@@ -77,7 +77,7 @@ public class Server {
 				clusterHosts = new String[10];
 				clusterProfilePorts = new Integer[10];
 
-			/*	int i = 0;
+				int i = 0;
 				System.out
 						.println("Following clusters will be used for analysis support:");
 				for (String line : clusters) {
@@ -86,7 +86,7 @@ public class Server {
 					clusterHosts[i] = parts[0];
 					clusterProfilePorts[i] = Integer.parseInt(parts[1]);
 					++i;
-				}*/
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -100,8 +100,8 @@ public class Server {
 		dataPacketReader = new DataPacketReader();
 		dataPacketReader.start();
 
-		// nodeSender = new NodeSender();
-		// nodeSender.start();
+		 nodeSender = new NodeSender();
+		 nodeSender.start();
 	}
 
 	// thread to read packets form analysis application
@@ -144,11 +144,14 @@ public class Server {
 			String isRead = null;
 			clusterNodes.clear();
 			try {
+				
 				// iterate for each cluster config
 				for (int i = 0; i < clusterHosts.length; ++i) {
 					isRead = "NO";
+					System.out.println("command "+clusterHosts[i]);
 					if (clusterHosts[i] != null) {
-
+						System.out.println("command "+clusterHosts[i]);
+						
 						// create a new socket and set timeout to 2 seconds
 						clusterDS = new Socket(clusterHosts[i],
 								clusterProfilePorts[i]);
@@ -260,10 +263,10 @@ public class Server {
 					oin = new ObjectInputStream(clSocket.getInputStream());
 
 					packet = (Packet) oin.readObject();
-
 					// if request is to list active clusters
 					if (packet.getAction() == Action.LIST_AC) {
 						// list activve clusters by pinging each cluster
+						
 						activeClusters = listActiveClusters();
 						response.clear();
 
@@ -344,7 +347,8 @@ public class Server {
 						 */
 
 					} else if (packet.getAction() == Action.SYNC_UPD) {
-
+						System.out.println("Sysnch Date\n\n\n\n");
+						
 						response.clear();
 						response.put("SUPD", UPDS);
 						response.put("LST", totalLatency);

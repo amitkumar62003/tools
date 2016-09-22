@@ -55,6 +55,7 @@ public class SenerioWindow extends JFrame implements Runnable, MouseListener,
 	private Map<String, Coupling> BPDC = null;
 	private Integer chartCount = 0;
 
+	
 	private JPanel chartMainPanel = null;
 	private JLabel classNameLb = null;
 	private JLabel inCouplingLb = null;

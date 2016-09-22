@@ -189,7 +189,7 @@ public class ConfigEnvironment extends JFrame implements ActionListener {
 					.getResource("icon/cluster.png").toString().replace("file:", "")
 					.replace("/bin", "")
 					.replace("/target/classes", "")
-					.replace("sca/ls/cloud/ui/icon/cluster.png", "")
+					.replace("sdma/rtc/ui/icon/cluster.png", "")
 					+ "resources.zip"));
 			output = new FileOutputStream(scalsBaseDirTf.getText() + "resources.zip");
 			while ((bytesRead = input.read(buf)) > 0) {
